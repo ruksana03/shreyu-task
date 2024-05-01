@@ -1,6 +1,5 @@
-import { Button, Dropdown } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import Table from "../../../../components/Table";
-import TimeSheetsModal from "../Timesheets/TimeSheetsModal";
 import { useState } from "react";
 import user1 from "../../../../assets/images/users/avatar-1.jpg"
 import user2 from "../../../../assets/images/users/avatar-2.jpg"
@@ -9,17 +8,10 @@ import user4 from "../../../../assets/images/users/avatar-4.jpg"
 import user5 from "../../../../assets/images/users/avatar-5.jpg"
 import user6 from "../../../../assets/images/users/avatar-6.jpg"
 import user7 from "../../../../assets/images/users/avatar-7.jpg"
-// import user8 from "../../../../assets/images/users/avatar-8.jpg"
-// import user9 from "../../../../assets/images/users/avatar-9.jpg"
-// import user10 from "../../../../assets/images/users/avatar-10.jpg"
-// import MaskedInput from "react-text-mask";
-// import { FormInput } from "../../../../components";
-// import { useForm } from "react-hook-form";
-// import { yupResolver } from "@hookform/resolvers/yup";
-// import * as yup from "yup";
 import ShiftAndScheduleForm from "./ShiftAndScheduleForm";
 import AddShiftModal from "./AddShiftModal";
 import EditShiftModal from "./EditShiftModal";
+import { Link } from "react-router-dom";
 
 
 
@@ -149,13 +141,13 @@ const ShiftAndSchedule = () => {
             accessor: "fri21",
             sort: false,
             Cell: ({ cell }) => cell.value ? (
-                <div onClick={() => editEvent(cell.value)}style={{ cursor: 'pointer' }}>
+                <div onClick={() => editEvent(cell.value)} style={{ cursor: 'pointer', border: '2px dashed  green', padding: '6px' }}>
                     <span>{cell.value.time}</span>
                     <br />
                     <span>{cell.value.designation}</span>
                 </div>
             ) : (
-                <div onClick={createNewEvent} style={{ cursor: 'pointer' }}>+</div>
+                <div onClick={createNewEvent} style={{ cursor: 'pointer' }}><i class="bi bi-plus-lg" style={{ border: '1px dashed  #A6A8A9', padding: '6px' }}></i></div>
             )
         },
         {
@@ -163,13 +155,13 @@ const ShiftAndSchedule = () => {
             accessor: "sat22",
             sort: false,
             Cell: ({ cell }) => cell.value ? (
-                <div onClick={() => editEvent(cell.value)} style={{ cursor: 'pointer' }}>
+                <div onClick={() => editEvent(cell.value)} style={{ cursor: 'pointer', border: '2px dashed  green', padding: '6px' }}>
                     <span>{cell.value.time}</span>
                     <br />
                     <span>{cell.value.designation}</span>
                 </div>
             ) : (
-                <div onClick={createNewEvent} style={{ cursor: 'pointer' }}>+</div>
+                <div onClick={createNewEvent} style={{ cursor: 'pointer' }}><i class="bi bi-plus-lg" style={{ border: '1px dashed  #A6A8A9', padding: '6px' }} ></i></div>
             )
         },
         {
@@ -177,13 +169,13 @@ const ShiftAndSchedule = () => {
             accessor: "sun23",
             sort: false,
             Cell: ({ cell }) => cell.value ? (
-                <div onClick={() => editEvent(cell.value)} style={{ cursor: 'pointer' }}>
+                <div onClick={() => editEvent(cell.value)} style={{ cursor: 'pointer', border: '2px dashed  green', padding: '6px' }}>
                     <span>{cell.value.time}</span>
                     <br />
                     <span>{cell.value.designation}</span>
                 </div>
             ) : (
-                <div onClick={createNewEvent} style={{ cursor: 'pointer' }}>+</div>
+                <div onClick={createNewEvent} style={{ cursor: 'pointer' }}><i class="bi bi-plus-lg" style={{ border: '1px dashed  #A6A8A9', padding: '6px' }}></i></div>
             )
         },
         {
@@ -191,13 +183,13 @@ const ShiftAndSchedule = () => {
             accessor: "mon24",
             sort: false,
             Cell: ({ cell }) => cell.value ? (
-                <div onClick={() => editEvent(cell.value)} style={{ cursor: 'pointer' }}>
+                <div onClick={() => editEvent(cell.value)} style={{ cursor: 'pointer', border: '2px dashed  green', padding: '6px' }}>
                     <span>{cell.value.time}</span>
                     <br />
                     <span>{cell.value.designation}</span>
                 </div>
             ) : (
-                <div onClick={createNewEvent} style={{ cursor: 'pointer' }}>+</div>
+                <div onClick={createNewEvent} style={{ cursor: 'pointer' }}><i class="bi bi-plus-lg" style={{ border: '1px dashed  #A6A8A9', padding: '6px' }}></i></div>
             )
         },
         {
@@ -205,13 +197,13 @@ const ShiftAndSchedule = () => {
             accessor: "tue25",
             sort: false,
             Cell: ({ cell }) => cell.value ? (
-                <div onClick={() => editEvent(cell.value)} style={{ cursor: 'pointer' }}>
+                <div onClick={() => editEvent(cell.value)} style={{ cursor: 'pointer', border: '2px dashed  green', padding: '6px' }}>
                     <span>{cell.value.time}</span>
                     <br />
                     <span>{cell.value.designation}</span>
                 </div>
             ) : (
-                <div onClick={createNewEvent} style={{ cursor: 'pointer' }}>+</div>
+                <div onClick={createNewEvent} style={{ cursor: 'pointer' }}><i class="bi bi-plus-lg" style={{ border: '1px dashed  #A6A8A9', padding: '6px' }}></i></div>
             )
         },
         {
@@ -219,13 +211,13 @@ const ShiftAndSchedule = () => {
             accessor: "wed26",
             sort: false,
             Cell: ({ cell }) => cell.value ? (
-                <div onClick={() => editEvent(cell.value)} style={{ cursor: 'pointer' }}>
+                <div onClick={() => editEvent(cell.value)} style={{ cursor: 'pointer', border: '2px dashed  green', padding: '6px' }}>
                     <span>{cell.value.time}</span>
                     <br />
                     <span>{cell.value.designation}</span>
                 </div>
             ) : (
-                <div onClick={createNewEvent} style={{ cursor: 'pointer' }}>+</div>
+                <div onClick={createNewEvent} style={{ cursor: 'pointer' }}><i class="bi bi-plus-lg" style={{ border: '1px dashed  #A6A8A9', padding: '6px' }}></i></div>
             )
         },
     ];
@@ -256,14 +248,16 @@ const ShiftAndSchedule = () => {
                     >
                         Assign Shifts
                     </Button>
-                    {/* <Button
-                        variant="primary"
-                        className="mt-2 me-1"
-                        id="btn-new-event"
-                        onClick={createNewEvent}
-                    >
-                        Shifts
-                    </Button> */}
+                    <Link to={'/employee/Shift-List'}>
+                        <Button
+                            variant="primary"
+                            className="mt-2 me-1"
+                            id="btn-new-event"
+                        // onClick={createNewEvent}
+                        >
+                            Shifts
+                        </Button>
+                    </Link>
                 </div>
             </div>
 
@@ -286,9 +280,9 @@ const ShiftAndSchedule = () => {
             {
                 showEditEventModal && (
                     <EditShiftModal
-                    isOpen={showEditEventModal}
-                    onClose={onEditCloseModal}
-                    isEditable={isEditableEditModal}/>
+                        isOpen={showEditEventModal}
+                        onClose={onEditCloseModal}
+                        isEditable={isEditableEditModal} />
                 )
             }
 

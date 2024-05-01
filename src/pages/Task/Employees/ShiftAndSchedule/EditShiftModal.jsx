@@ -56,7 +56,7 @@ const EditShiftModal = ({
                         <Col sm={6}>
                             <FormInput
                                 type="select"
-                                label="Employee Name"
+                                label="Department"
                                 name="className"
                                 className="form-control"
                                 containerClass={"mb-3"}
@@ -65,7 +65,7 @@ const EditShiftModal = ({
                                 errors={errors}
                                 control={control}
                             >
-                                <option value="bg-danger"></option>
+                                <option value="bg-danger">Select</option>
                                 <option value="bg-success">Finance</option>
                                 <option value="bg-primary">Finance and Management</option>
                                 <option value="bg-info">Hr Finance</option>
@@ -116,6 +116,7 @@ const EditShiftModal = ({
                                 errors={errors}
                                 control={control}
                             >
+                                <option value="bg-danger">Select</option>
                                 <option value="bg-danger">10:30 Shift</option>
                                 <option value="bg-success">Daily Shift</option>
                                 <option value="bg-primary">New Shift</option>
@@ -171,9 +172,9 @@ const EditShiftModal = ({
                         </Col>
 
 
-                             {/* Row-4 */}
+                        {/* Row-4 */}
 
-                             <Col sm={4}>
+                        <Col sm={4}>
                             <FormInput
                                 type="text"
                                 label="Min Start Time *"
@@ -219,9 +220,9 @@ const EditShiftModal = ({
                             />
                         </Col>
 
-                         {/* Row-5 */}
+                        {/* Row-5 */}
 
-                         <Col sm={4}>
+                        <Col sm={4}>
                             <FormInput
                                 type="text"
                                 label="Break Time *"
@@ -236,6 +237,128 @@ const EditShiftModal = ({
                                 control={control}
                             />
                         </Col>
+                        {/* row-6  */}
+                        <Col sm={12}>
+                            <input
+                                type="checkbox"
+                                className="form-check-input"
+                            />
+                            <span> Recurring Shift</span>
+                        </Col>
+
+                        {/* row-7  */}
+                        <div style={{ display: "flex", gap: '4px', marginTop: '10px' }}>
+                            <span>Repeat Every</span>
+                            <Col sm={2}>
+
+                                <FormInput
+                                    type="select"
+                                    // label="Shift"
+                                    name="className"
+                                    className="form-control"
+                                    containerClass={"mb-3"}
+                                    register={register}
+                                    key="className"
+                                    errors={errors}
+                                    control={control}
+                                >
+                                    <option value="bg-danger">1</option>
+                                    <option value="bg-danger">2</option>
+                                    <option value="bg-success">3</option>
+                                    <option value="bg-primary">4</option>
+                                    <option value="bg-primary">5</option>
+                                    <option value="bg-primary">6</option>
+                                </FormInput>
+
+                            </Col>
+                            <span>  week(s)</span>
+                        </div>
+
+                        {/* row-8  */}
+                        <Col sm={12}>
+                            <input
+                                type="checkbox"
+                                className="form-check-input"
+                            />
+                            <span> M</span>
+                            <input
+                                type="checkbox"
+                                className="form-check-input"
+                            />
+                            <span>T</span>
+                            <input
+                                type="checkbox"
+                                className="form-check-input"
+                            />
+                            <span>W</span>
+                            <input
+                                type="checkbox"
+                                className="form-check-input"
+                            />
+                            <span>T</span>
+                            <input
+                                type="checkbox"
+                                className="form-check-input"
+                            />
+                            <span>F</span>
+                            <input
+                                type="checkbox"
+                                className="form-check-input"
+                            />
+                            <span>S</span>
+                            <input
+                                type="checkbox"
+                                className="form-check-input"
+                            />
+                            <span>S</span>
+                        </Col>
+
+                        {/* Row-9  */}
+                        <Col sm={6}>
+                            <FormInput
+                                type="date"
+                                label="End On"
+                                name="date"
+                                className="form-control"
+                                placeholder="Date"
+                                containerClass={"mt-3"}
+                                register={register}
+                                key="title"
+                                errors={errors}
+                                control={control}
+                            />
+                        </Col>
+
+                        {/* Row-10  */}
+                        <Col sm={12}>
+                            <input
+                                type="checkbox"
+                                className="form-check-input"
+                            />
+                            <span> Indefinite</span>
+                        </Col>
+
+                        {/* Row-11 */}
+                        <div style={{marginTop:'10px', fontWeight:'bold'}}>
+                            <span>  Accept Extra Hours</span>
+                            <Col sm={12}>
+                                <input
+                                    type="checkbox"
+                                    className="form-check-input"
+                                />
+                            </Col>
+                        </div>
+
+                         {/* Row-12 */}
+                         <div style={{marginTop:'10px', fontWeight:'bold'}}>
+                            <span>  Publish</span>
+                            <Col sm={12}>
+                                <input
+                                    type="checkbox"
+                                    className="form-check-input"
+                                />
+                            </Col>
+                        </div>
 
                     </Row>
 

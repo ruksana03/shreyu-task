@@ -8,6 +8,7 @@ import Designations from "../pages/Task/Employees/Designations/Designations";
 import Timesheets from "../pages/Task/Employees/Timesheets/Timesheets";
 import ShiftAndSchedule from "../pages/Task/Employees/ShiftAndSchedule/ShiftAndSchedule";
 import Overtime from "../pages/Task/Employees/Overtime/Overtime";
+import Shift from "../pages/Task/Employees/Shift/Shift";
 // import Root from "./Root";
 
 // lazy load all the views
@@ -172,6 +173,15 @@ const employeeShiftAndScheduleRoutes: RoutesProps = {
   element: <ShiftAndSchedule/>,
 };
 
+const employeeShiftListRoutes: RoutesProps = {
+  path: "/employee/Shift-List",
+  name: "Shift ",
+  route: PrivateRoute,
+  // roles: ["Admin"],
+  icon: "calendar",
+  element: <Shift/>,
+};
+
 const employeeOvertimeRoutes: RoutesProps = {
   path: "/employee/Overtime",
   name: "Overtime",
@@ -187,6 +197,7 @@ const employeeRoutes = [
   employeeDesignationsRoutes,
   employeeTimesheetsRoutes,
   employeeShiftAndScheduleRoutes,
+  employeeShiftListRoutes,
   employeeOvertimeRoutes,
 ]
 
