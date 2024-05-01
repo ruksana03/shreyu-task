@@ -12,6 +12,7 @@ import user10 from "../../../../assets/images/users/avatar-10.jpg"
 import { useState } from "react";
 import Table from "../../../../components/Table";
 import OverTimeModal from "./OverTimeModal";
+import DeleteModal from "../DeleteModal";
 
 const Overtime = () => {
     const [showAddEditEvent, setShowAddEditEvent] = useState(false);
@@ -19,8 +20,22 @@ const Overtime = () => {
     const onCloseModal = () => setShowAddEditEvent(false);
     const onOpenModal = () => setShowAddEditEvent(true);
 
+
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [isEditableDelete, setIsEditableDelete] = useState(false);
+    const onCloseDeleteModal = () => setShowDeleteModal(false);
+    const onOpenDeleteModal = () => setShowDeleteModal(true);
+    const deleteEvent = () => {
+        setIsEditableDelete(true);
+        onOpenDeleteModal();
+    };
+
     const createNewEvent = () => {
         setIsEditable(false);
+        onOpenModal();
+    };
+    const createNewEditEvent = () => {
+        setIsEditable(true);
         onOpenModal();
     };
 
@@ -111,10 +126,10 @@ const Overtime = () => {
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
-                        <Dropdown.Item>
+                        <Dropdown.Item onClick={createNewEditEvent}>
                             <i className="uil uil-edit-alt me-2"></i>Edit
                         </Dropdown.Item>
-                        <Dropdown.Item className="text-danger">
+                        <Dropdown.Item className="text-danger" onClick={deleteEvent}>
                             <i className="uil uil-trash me-2"></i>Delete
                         </Dropdown.Item>
                     </Dropdown.Menu>
@@ -164,27 +179,27 @@ const Overtime = () => {
                 />
             )}
 
-            <div style={{display:'flex', justifyContent:'space-between', gap:'4px'}}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', gap: '4px' }}>
                 <Card>
-                    <div className="card-pricing p-2" style={{width:'380px', textAlign:'center'}} >
+                    <div className="card-pricing p-2" style={{ width: '380px', textAlign: 'center' }} >
                         <h4>Overtime Employee</h4>
                         <h3>12 <span className="fs-14">this month</span></h3>
                     </div>
                 </Card>
                 <Card>
-                    <div className="card-pricing p-2" style={{width:'380px', textAlign:'center'}} >
+                    <div className="card-pricing p-2" style={{ width: '380px', textAlign: 'center' }} >
                         <h4>Overtime Hours</h4>
                         <h3>118 <span className="fs-14">this month</span></h3>
                     </div>
                 </Card>
                 <Card>
-                    <div className="card-pricing p-2" style={{width:'380px', textAlign:'center'}}>
+                    <div className="card-pricing p-2" style={{ width: '380px', textAlign: 'center' }}>
                         <h4>Pending Request</h4>
                         <h3>23</h3>
                     </div>
                 </Card>
                 <Card>
-                    <div className="card-pricing p-2" style={{width:'380px', textAlign:'center'}}>
+                    <div className="card-pricing p-2" style={{ width: '380px', textAlign: 'center' }}>
                         <h4>Rejected</h4>
                         <h3>5</h3>
                     </div>
@@ -192,6 +207,15 @@ const Overtime = () => {
 
 
             </div>
+
+            {
+                showDeleteModal &&
+                <DeleteModal
+                    isOpen={showDeleteModal}
+                    onClose={onCloseDeleteModal}
+                    isEditable={isEditableDelete}
+                />
+            }
 
             <Table
                 columns={columns}

@@ -42,7 +42,7 @@ const AddNewShiftModal = ({
         <Modal show={isOpen} onHide={onClose} backdrop="static" keyboard={false}>
             <Modal.Header closeButton className="pb-2 px-4 border-bottom-0">
                 <Modal.Title id="modal-title">
-                    <h5> {isEditable ? "Add Schedule" : "Add Schedule"} </h5>
+                    <h5> {isEditable ? "Edit Schedule" : "Add Schedule"} </h5>
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body className="px-4 pb-4 pt-0">

@@ -3,6 +3,7 @@ import { Button, Dropdown } from "react-bootstrap";
 import AddShiftModal from "../ShiftAndSchedule/AddShiftModal";
 import Table from "../../../../components/Table";
 import AddNewShiftModal from "./AddNewShiftModal";
+import DeleteModal from "../DeleteModal";
 
 
 const Shift = () => {
@@ -16,12 +17,25 @@ const Shift = () => {
     const onCloseShiftModal = () => setShowAddShift(false);
     const onOpenShiftModal = () => setShowAddShift(true);
 
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [isEditableDelete, setIsEditableDelete] = useState(false);
+    const onCloseDeleteModal = () => setShowDeleteModal(false);
+    const onOpenDeleteModal = () => setShowDeleteModal(true);
+    const deleteEvent = () => {
+        setIsEditableDelete(true);
+        onOpenDeleteModal();
+    };
+
     const createNewEvent = () => {
         setIsEditable(false);
         onOpenModal();
     };
     const createNewShiftEvent = () => {
         setIsEditableShiftModal(false);
+        onOpenShiftModal();
+    };
+    const createNewEditableShiftEvent = () => {
+        setIsEditableShiftModal(true);
         onOpenShiftModal();
     };
 
@@ -135,25 +149,24 @@ const Shift = () => {
             accessor: "",
             sort: false,
             Cell: () => (
+                    <Dropdown >
+                        <Dropdown.Toggle
+                            as="a"
+                            className="cursor-pointer text-muted text-center arrow-none"
+                        >
+                            <i className="uil uil-ellipsis-v fs-14"></i>
+                        </Dropdown.Toggle>
 
-                <Dropdown >
-                    <Dropdown.Toggle
-                        as="a"
-                        className="cursor-pointer text-muted text-center arrow-none"
-                    >
-                        <i className="uil uil-ellipsis-v fs-14"></i>
-                    </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                            <Dropdown.Item onClick={createNewEditableShiftEvent}>
+                                <i className="uil uil-edit-alt me-2"></i>Edit
 
-                    <Dropdown.Menu>
-                        <Dropdown.Item>
-                            <i className="uil uil-edit-alt me-2"></i>Edit
-                        </Dropdown.Item>
-                        <Dropdown.Item className="text-danger">
-                            <i className="uil uil-trash me-2"></i>Delete
-                        </Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
-
+                            </Dropdown.Item>
+                            <Dropdown.Item className="text-danger" onClick={deleteEvent}>
+                                <i className="uil uil-trash me-2"></i>Delete
+                            </Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
             )
         }
 
@@ -218,6 +231,15 @@ const Shift = () => {
 
                 </div>
             </div>
+
+            {
+                showDeleteModal &&
+                <DeleteModal
+                    isOpen={showDeleteModal}
+                    onClose={onCloseDeleteModal}
+                    isEditable={isEditableDelete}
+                />
+            }
 
             <Table
                 columns={columns}

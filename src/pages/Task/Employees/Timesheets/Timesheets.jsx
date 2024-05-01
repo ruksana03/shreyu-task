@@ -12,6 +12,7 @@ import user7 from "../../../../assets/images/users/avatar-7.jpg"
 import user8 from "../../../../assets/images/users/avatar-8.jpg"
 import user9 from "../../../../assets/images/users/avatar-9.jpg"
 import user10 from "../../../../assets/images/users/avatar-10.jpg"
+import DeleteModal from "../DeleteModal";
 
 const Timesheets = () => {
     const [showAddEditEvent, setShowAddEditEvent] = useState(false);
@@ -19,8 +20,22 @@ const Timesheets = () => {
     const onCloseModal = () => setShowAddEditEvent(false);
     const onOpenModal = () => setShowAddEditEvent(true);
 
+
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [isEditableDelete, setIsEditableDelete] = useState(false);
+    const onCloseDeleteModal = () => setShowDeleteModal(false);
+    const onOpenDeleteModal = () => setShowDeleteModal(true);
+    const deleteEvent = () => {
+        setIsEditableDelete(true);
+        onOpenDeleteModal();
+    };
+
     const createNewEvent = () => {
         setIsEditable(false);
+        onOpenModal();
+    };
+    const createNewEditEvent = () => {
+        setIsEditable(true);
         onOpenModal();
     };
 
@@ -91,10 +106,10 @@ const Timesheets = () => {
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>
-                            <Dropdown.Item>
+                            <Dropdown.Item onClick={createNewEditEvent}>
                                 <i className="uil uil-edit-alt me-2"></i>Edit
                             </Dropdown.Item>
-                            <Dropdown.Item className="text-danger">
+                            <Dropdown.Item className="text-danger" onClick={deleteEvent}>
                                 <i className="uil uil-trash me-2"></i>Delete
                             </Dropdown.Item>
                         </Dropdown.Menu>
@@ -144,6 +159,16 @@ const Timesheets = () => {
                 //   onAddEvent={onAddEvent}
                 />
             )}
+
+{
+                showDeleteModal &&
+                <DeleteModal
+                    isOpen={showDeleteModal}
+                    onClose={onCloseDeleteModal}
+                    isEditable={isEditableDelete}
+                />
+            }
+
 
             <Table
                 columns={columns}
