@@ -8,14 +8,16 @@ import DeleteModal from "../DeleteModal";
 const Designations = () => {
     const [showAddEditEvent, setShowAddEditEvent] = useState(false);
     const [isEditable, setIsEditable] = useState(false);
+    const [selectedDesignation, setSelectedDesignation] = useState(null); // State variable to store selected designation data
+
     const onCloseModal = () => setShowAddEditEvent(false);
     const onOpenModal = () => setShowAddEditEvent(true);
-
 
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [isEditableDelete, setIsEditableDelete] = useState(false);
     const onCloseDeleteModal = () => setShowDeleteModal(false);
     const onOpenDeleteModal = () => setShowDeleteModal(true);
+
     const deleteEvent = () => {
         setIsEditableDelete(true);
         onOpenDeleteModal();
@@ -25,10 +27,18 @@ const Designations = () => {
         setIsEditable(false);
         onOpenModal();
     };
-    const createNewEditEvent = () => {
-        setIsEditable(true);
-        onOpenModal();
+
+    const createNewEditEvent = (rowData) => {
+        // Check if the selectedDesignation is already the same as the rowData
+        if (selectedDesignation !== rowData) {
+            setIsEditable(true);
+            setSelectedDesignation(rowData); // Update selectedDesignation with the row data
+            setShowAddEditEvent(true); // Open the modal
+        }
     };
+    
+    
+    console.log(selectedDesignation);
 
     // Sample data
     const designationData = [
@@ -65,9 +75,8 @@ const Designations = () => {
             Header: "Action",
             accessor: "",
             sort: false,
-            Cell: () => (
-
-                <Dropdown >
+            Cell: ({ row }) => (
+                <Dropdown>
                     <Dropdown.Toggle
                         as="a"
                         className="cursor-pointer text-muted text-center arrow-none"
@@ -76,7 +85,7 @@ const Designations = () => {
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
-                        <Dropdown.Item onClick={createNewEditEvent}>
+                        <Dropdown.Item onClick={() => {createNewEditEvent(row.original)}}>
                             <i className="uil uil-edit-alt me-2"></i>Edit
                         </Dropdown.Item>
                         <Dropdown.Item className="text-danger" onClick={deleteEvent}>
@@ -84,7 +93,6 @@ const Designations = () => {
                         </Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
-
             )
         }
     ];
@@ -122,15 +130,11 @@ const Designations = () => {
                     isOpen={showAddEditEvent}
                     onClose={onCloseModal}
                     isEditable={isEditable}
-                //   eventData={eventData}
-                //   onUpdateEvent={onUpdateEvent}
-                //   onRemoveEvent={onRemoveEvent}
-                //   onAddEvent={onAddEvent}
+                    designationData={selectedDesignation} // Pass selected designation data to the modal
                 />
             )}
 
-            {
-                showDeleteModal &&
+            {showDeleteModal &&
                 <DeleteModal
                     isOpen={showDeleteModal}
                     onClose={onCloseDeleteModal}

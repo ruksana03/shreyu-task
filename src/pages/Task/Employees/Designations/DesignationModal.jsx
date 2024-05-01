@@ -14,6 +14,7 @@ const DesignationModal  = ({
     onRemoveEvent,
     onUpdateEvent,
     onAddEvent,
+    designationData
   }) => {
     const [event] = useState(eventData);
   
@@ -59,6 +60,7 @@ const DesignationModal  = ({
                   type="text"
                   label="Designations Name"
                   name="title"
+                  value={designationData?.name}
                   className="form-control"
                   placeholder="Insert Event Name"
                   containerClass={"mb-3"}
@@ -74,6 +76,7 @@ const DesignationModal  = ({
                 type="select"
                 label="Department"
                 name="className"
+                value={designationData?.designation}
                 className="form-control"
                 containerClass={"mb-3"}
                 register={register}
@@ -81,7 +84,7 @@ const DesignationModal  = ({
                 errors={errors}
                 control={control}
               >
-                <option value="bg-danger">Select Department</option>
+                <option value="bg-danger">{designationData?.designation}</option>
                 <option value="bg-success">Web Development</option>
                 <option value="bg-primary">IT Management</option>
                 <option value="bg-info">Marketing</option>

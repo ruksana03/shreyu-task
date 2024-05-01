@@ -13,8 +13,10 @@ const TimeSheetsModal = ({
     onRemoveEvent,
     onUpdateEvent,
     onAddEvent,
+    timeSheetsData
 }) => {
     const [event] = useState(eventData);
+    console.log(timeSheetsData);
 
     // form validation schema
     const schemaResolver = yupResolver(
@@ -53,18 +55,19 @@ const TimeSheetsModal = ({
                     onSubmit={handleSubmit(onSubmitEvent)}
                 >
                     <Row>
-                        <Col sm={4}>
+                        <Col sm={6}>
                             <FormInput
                                 type="select"
                                 label="Department"
                                 name="className"
-                                className="form-control"
+                                className="form-control "
                                 containerClass={"mb-3"}
                                 register={register}
                                 key="className"
                                 errors={errors}
                                 control={control}
                             >
+                                <option value="bg-danger">{timeSheetsData?.projects}</option>
                                 <option value="bg-danger">Office Management</option>
                                 <option value="bg-success">Project Management</option>
                                 <option value="bg-primary">Video Calling App</option>
@@ -77,7 +80,7 @@ const TimeSheetsModal = ({
                                     type="text"
                                     label="Deadline"
                                     name="title"
-                                    defaultValue={'5 May 2023'}
+                                    defaultValue={timeSheetsData?.date}
                                     className="form-control"
                                     placeholder="Insert Event Name"
                                     containerClass={"mb-3"}
@@ -91,8 +94,10 @@ const TimeSheetsModal = ({
                                     type="number"
                                     label="Total hours"
                                     name="title"
-                                    readOnly
-                                    value={100}
+                                    
+                                    // defaultValue={timeSheetsData?.assignHours}
+                                    // value={100}
+                                    value={timeSheetsData?.assignHours}
                                     className="form-control"
                                     placeholder="Total Hours"
                                     containerClass={"mb-3"}
@@ -108,8 +113,9 @@ const TimeSheetsModal = ({
                                     type="number"
                                     label="Remaining Hours"
                                     name="title"
-                                    readOnly
-                                    value={60}
+                                    // defaultValue={timeSheetsData?.hours}
+                                    // value={60}
+                                    value={timeSheetsData?.hours}
                                     className="form-control"
                                     placeholder="Remaining Hours"
                                     containerClass={"mb-3"}
@@ -126,6 +132,7 @@ const TimeSheetsModal = ({
                                     type="date"
                                     label="Date"
                                     name="date"
+                                    value={timeSheetsData?.date}
                                     className="form-control"
                                     placeholder="Date"
                                     containerClass={"mb-3"}
@@ -140,6 +147,7 @@ const TimeSheetsModal = ({
                                     type="number"
                                     label="Hours"
                                     name="hours"
+                                    value={timeSheetsData?.hours}
                                     className="form-control"
                                     placeholder="Hours"
                                     containerClass={"mb-3"}
@@ -157,6 +165,7 @@ const TimeSheetsModal = ({
                                     type="textarea"
                                     label="Description"
                                     name="description"
+                                    value={timeSheetsData?.description}
                                     placeholder="Description"
                                     containerClass={"mb-3"}
                                     register={register}

@@ -19,6 +19,8 @@ const Overtime = () => {
     const [isEditable, setIsEditable] = useState(false);
     const onCloseModal = () => setShowAddEditEvent(false);
     const onOpenModal = () => setShowAddEditEvent(true);
+    const [selectedRow, setSelectedRow] = useState(null); // State variable to store selected department data
+
 
 
     const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -34,10 +36,12 @@ const Overtime = () => {
         setIsEditable(false);
         onOpenModal();
     };
-    const createNewEditEvent = () => {
+    const createNewEditEvent = (rowData) => {
         setIsEditable(true);
+        setSelectedRow(rowData)
         onOpenModal();
     };
+    console.log(selectedRow);
 
     // Sample data
     const designationData = [
@@ -115,7 +119,7 @@ const Overtime = () => {
             Header: "Action",
             accessor: "",
             sort: false,
-            Cell: () => (
+            Cell: ({row}) => (
 
                 <Dropdown >
                     <Dropdown.Toggle
@@ -126,7 +130,7 @@ const Overtime = () => {
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
-                        <Dropdown.Item onClick={createNewEditEvent}>
+                        <Dropdown.Item onClick={() => createNewEditEvent(row.original)}>
                             <i className="uil uil-edit-alt me-2"></i>Edit
                         </Dropdown.Item>
                         <Dropdown.Item className="text-danger" onClick={deleteEvent}>
@@ -172,6 +176,7 @@ const Overtime = () => {
                     isOpen={showAddEditEvent}
                     onClose={onCloseModal}
                     isEditable={isEditable}
+                    overTimeData = {selectedRow}
                 //   eventData={eventData}
                 //   onUpdateEvent={onUpdateEvent}
                 //   onRemoveEvent={onRemoveEvent}

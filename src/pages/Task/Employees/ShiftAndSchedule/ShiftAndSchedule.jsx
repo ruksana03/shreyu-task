@@ -20,6 +20,8 @@ const ShiftAndSchedule = () => {
     const [isEditable, setIsEditable] = useState(false);
     const onCloseModal = () => setShowAddEditEvent(false);
     const onOpenModal = () => setShowAddEditEvent(true);
+    const [selectedShift, setSelectedShift] = useState(null); // State variable to store selected department data
+
 
     const [showEditEventModal, setShowEditEventModal] = useState(false);
     const [isEditableEditModal, setIsEditableEditModal] = useState(false);

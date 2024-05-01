@@ -5,17 +5,18 @@ import DepartmentModal from "./DepartmentModal";
 import DeleteModal from "../DeleteModal";
 
 const Departments = () => {
-
     const [showAddEditEvent, setShowAddEditEvent] = useState(false);
     const [isEditable, setIsEditable] = useState(false);
+    const [selectedDepartment, setSelectedDepartment] = useState(null); // State variable to store selected department data
+
     const onCloseModal = () => setShowAddEditEvent(false);
     const onOpenModal = () => setShowAddEditEvent(true);
-
 
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [isEditableDelete, setIsEditableDelete] = useState(false);
     const onCloseDeleteModal = () => setShowDeleteModal(false);
     const onOpenDeleteModal = () => setShowDeleteModal(true);
+
     const deleteEvent = () => {
         setIsEditableDelete(true);
         onOpenDeleteModal();
@@ -25,12 +26,14 @@ const Departments = () => {
         setIsEditable(false);
         onOpenModal();
     };
-    const createNewEditEvent = () => {
+
+    const createNewEditEvent = (rowData) => {
         setIsEditable(true);
+        setSelectedDepartment(rowData);
+        console.log(rowData)
         onOpenModal();
     };
-
-   
+    console.log(selectedDepartment);
 
     // Sample data
     const departmentsData = [
@@ -58,7 +61,7 @@ const Departments = () => {
             Header: "Action",
             accessor: "",
             sort: false,
-            Cell: () => (
+            Cell: ({ row }) => ( // Destructure row from props
                 <Dropdown>
                     <Dropdown.Toggle
                         as="a"
@@ -68,7 +71,7 @@ const Departments = () => {
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
-                        <Dropdown.Item onClick={createNewEditEvent}>
+                        <Dropdown.Item onClick={() => createNewEditEvent(row.original)}>
                             <i className="uil uil-edit-alt me-2"></i>Edit
                         </Dropdown.Item>
                         <Dropdown.Item className="text-danger" onClick={deleteEvent}>
@@ -113,10 +116,7 @@ const Departments = () => {
                     isOpen={showAddEditEvent}
                     onClose={onCloseModal}
                     isEditable={isEditable}
-                //   eventData={eventData}
-                //   onUpdateEvent={onUpdateEvent}
-                //   onRemoveEvent={onRemoveEvent}
-                //   onAddEvent={onAddEvent}
+                    departmentData={selectedDepartment}
                 />
             )}
 

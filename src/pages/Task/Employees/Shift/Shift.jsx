@@ -11,6 +11,8 @@ const Shift = () => {
     const [isEditable, setIsEditable] = useState(false);
     const onCloseModal = () => setShowAddEditEvent(false);
     const onOpenModal = () => setShowAddEditEvent(true);
+    const [selectedShift, setSelectedShift] = useState(null); // State variable to store selected department data
+
 
     const [showAddShift, setShowAddShift] = useState(false);
     const [isEditableShiftModal, setIsEditableShiftModal] = useState(false);
@@ -34,10 +36,12 @@ const Shift = () => {
         setIsEditableShiftModal(false);
         onOpenShiftModal();
     };
-    const createNewEditableShiftEvent = () => {
+    const createNewEditableShiftEvent = (rowData) => {
         setIsEditableShiftModal(true);
+        setSelectedShift(rowData)
         onOpenShiftModal();
     };
+    console.log(selectedShift);
 
 
     // sample Data 
@@ -148,28 +152,27 @@ const Shift = () => {
             Header: "Action",
             accessor: "",
             sort: false,
-            Cell: () => (
-                    <Dropdown >
-                        <Dropdown.Toggle
-                            as="a"
-                            className="cursor-pointer text-muted text-center arrow-none"
-                        >
-                            <i className="uil uil-ellipsis-v fs-14"></i>
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu>
-                            <Dropdown.Item onClick={createNewEditableShiftEvent}>
-                                <i className="uil uil-edit-alt me-2"></i>Edit
-
-                            </Dropdown.Item>
-                            <Dropdown.Item className="text-danger" onClick={deleteEvent}>
-                                <i className="uil uil-trash me-2"></i>Delete
-                            </Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
+            Cell: ({ row }) => (
+                <Dropdown>
+                    <Dropdown.Toggle
+                        as="a"
+                        className="cursor-pointer text-muted text-center arrow-none"
+                    >
+                        <i className="uil uil-ellipsis-v fs-14"></i>
+                    </Dropdown.Toggle>
+        
+                    <Dropdown.Menu>
+                        <Dropdown.Item onClick={() => createNewEditableShiftEvent(row.original)}>
+                            <i className="uil uil-edit-alt me-2"></i>Edit
+                        </Dropdown.Item>
+                        <Dropdown.Item className="text-danger" onClick={deleteEvent}>
+                            <i className="uil uil-trash me-2"></i>Delete
+                        </Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
             )
         }
-
+        
     ]
 
     // Size per page list for pagination
@@ -212,6 +215,7 @@ const Shift = () => {
                             isOpen={showAddEditEvent}
                             onClose={onCloseModal}
                             isEditable={isEditable}
+                            shiftData = {selectedShift}
                         //   eventData={eventData}
                         //   onUpdateEvent={onUpdateEvent}
                         //   onRemoveEvent={onRemoveEvent}
@@ -225,6 +229,7 @@ const Shift = () => {
                                 isOpen={onOpenShiftModal}
                                 onClose={onCloseShiftModal}
                                 isEditable={isEditableShiftModal}
+                                shiftData={selectedShift}
                             />
                         )
                     }

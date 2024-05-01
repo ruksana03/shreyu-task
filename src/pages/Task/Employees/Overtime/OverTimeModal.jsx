@@ -14,6 +14,7 @@ const OverTimeModal = ({
     onRemoveEvent,
     onUpdateEvent,
     onAddEvent,
+    overTimeData
 }) => {
     const [event] = useState(eventData);
 
@@ -59,6 +60,7 @@ const OverTimeModal = ({
                                 type="select"
                                 label="Select Employee"
                                 name="className"
+                                defaultValue={'fjgh'}
                                 className="form-control"
                                 containerClass={"mb-3"}
                                 register={register}
@@ -66,7 +68,7 @@ const OverTimeModal = ({
                                 errors={errors}
                                 control={control}
                             >
-                                <option value="bg-danger">Select</option>
+                                <option value="bg-danger">{overTimeData?.name}</option>
                                 <option value="bg-success">John Deo</option>
                                 <option value="bg-primary">Richard Miles</option>
                                 <option value="bg-info">John Smith</option>
@@ -77,6 +79,7 @@ const OverTimeModal = ({
                                     type="date"
                                     label="Date"
                                     name="date"
+                                    defaultValue={overTimeData?.date}
                                     className="form-control"
                                     placeholder="Date"
                                     containerClass={"mb-3"}
@@ -91,6 +94,7 @@ const OverTimeModal = ({
                                     type="number"
                                     label="Hours"
                                     name="hours"
+                                    value={overTimeData?.otHours}
                                     className="form-control"
                                     placeholder="Hours"
                                     containerClass={"mb-3"}
@@ -105,6 +109,7 @@ const OverTimeModal = ({
                                     type="textarea"
                                     label="Description"
                                     name="description"
+                                    value={overTimeData?.description}
                                     placeholder="Description"
                                     containerClass={"mb-3"}
                                     register={register}

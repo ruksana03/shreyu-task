@@ -19,6 +19,7 @@ const Timesheets = () => {
     const [isEditable, setIsEditable] = useState(false);
     const onCloseModal = () => setShowAddEditEvent(false);
     const onOpenModal = () => setShowAddEditEvent(true);
+    const [timesData,setTimesData] = useState(null)
 
 
     const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -34,10 +35,12 @@ const Timesheets = () => {
         setIsEditable(false);
         onOpenModal();
     };
-    const createNewEditEvent = () => {
+    const createNewEditEvent = (rowData) => {
         setIsEditable(true);
+        setTimesData(rowData)
         onOpenModal();
     };
+    console.log(timesData);
 
     // Sample data
     const designationData = [
@@ -95,7 +98,7 @@ const Timesheets = () => {
             Header: "Action",
             accessor: "",
             sort: false,
-            Cell: () => (
+            Cell: ({row}) => (
             
                     <Dropdown >
                         <Dropdown.Toggle
@@ -106,7 +109,7 @@ const Timesheets = () => {
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>
-                            <Dropdown.Item onClick={createNewEditEvent}>
+                            <Dropdown.Item onClick={()=>{createNewEditEvent(row.original)}}>
                                 <i className="uil uil-edit-alt me-2"></i>Edit
                             </Dropdown.Item>
                             <Dropdown.Item className="text-danger" onClick={deleteEvent}>
@@ -153,6 +156,7 @@ const Timesheets = () => {
                     isOpen={showAddEditEvent}
                     onClose={onCloseModal}
                     isEditable={isEditable}
+                    timeSheetsData = {timesData}
                 //   eventData={eventData}
                 //   onUpdateEvent={onUpdateEvent}
                 //   onRemoveEvent={onRemoveEvent}

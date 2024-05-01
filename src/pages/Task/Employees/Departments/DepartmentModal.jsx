@@ -14,8 +14,10 @@ const DepartmentModal = ({
     onRemoveEvent,
     onUpdateEvent,
     onAddEvent,
+    departmentData,
   }) => {
     const [event] = useState(eventData);
+    console.log(departmentData);
   
     // form validation schema
     const schemaResolver = yupResolver(
@@ -60,6 +62,7 @@ const DepartmentModal = ({
                   label="Department Name"
                   name="title"
                   className="form-control"
+                  value={departmentData?.name}
                   placeholder="Insert Event Name"
                   containerClass={"mb-3"}
                   register={register}

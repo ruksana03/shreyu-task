@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Modal, Row, Col, Button, Form } from "react-bootstrap";
+import { Modal, Row, Col, Button } from "react-bootstrap";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormInput } from "../../../../components";
@@ -13,8 +13,10 @@ const AddNewShiftModal = ({
     onRemoveEvent,
     onUpdateEvent,
     onAddEvent,
+    shiftData
 }) => {
     const [event] = useState(eventData);
+    console.log(shiftData)
 
     // form validation schema
     const schemaResolver = yupResolver(
@@ -59,6 +61,7 @@ const AddNewShiftModal = ({
                                 type="text"
                                 label="Shift Name"
                                 name="name"
+                                value={shiftData?.shiftName}
                                 className="form-control"
                                 placeholder=""
                                 containerClass={"mb-3"}
@@ -75,6 +78,7 @@ const AddNewShiftModal = ({
                                 type="time"
                                 label="Min Start Time"
                                 name="date"
+                                value={shiftData?.minStartTime}
                                 className="form-control"
                                 placeholder="Date"
                                 containerClass={"mb-3"}

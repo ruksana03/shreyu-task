@@ -13,8 +13,10 @@ const AddShiftModal = ({
     onRemoveEvent,
     onUpdateEvent,
     onAddEvent,
+    shiftData
 }) => {
     const [event] = useState(eventData);
+    console.log(shiftData)
 
     // form validation schema
     const schemaResolver = yupResolver(
